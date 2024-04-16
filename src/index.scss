@@ -1,0 +1,28 @@
+.wrapper {
+    h2 {
+        font-family: Montserrat;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 40px;
+        text-align: left;
+    }
+    .coins {
+        margin-bottom: 10px;
+        span:first-child {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        span:last-child {
+            margin-left: 10px;
+        }
+    }
+    .addCoins {
+        display: flex;
+        .addCoins__btn {
+            margin-right: 10px;
+            color: #FF7F22;
+            border-bottom: 1px dotted #FF7F22;
+            cursor: pointer;
+        }
+    }
+}
