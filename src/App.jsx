@@ -1,5 +1,7 @@
-// import img from './assets/react.svg'
-import { useState } from "react" 
+import { useState } from "react"
+import Wallet from "./Wallet"
+import Market from "./Market"
+import Warehouse from "./Warehouse"
 
 function App() {
 
@@ -32,18 +34,24 @@ function App() {
 
   return (
     <div className="wrapper">
-      <h2>Кошелек криптовалют</h2>
-      <div></div>
-      <div className="coins">
-        <span className="coins__count">{coinsCount}</span> 
-        biorobo 
-        <span className="coins__word">{coinsWord}</span>
-      </div>
-      <div className="addCoins">
-        <div onClick={onAddCoins} className="addCoins__btn">Нациганить</div>
-        <div className="addCoins__checkbox">
-          <input onChange={changeFlagStatus} type="checkbox"/>
-          <span>Циганить по 5 монет</span>
+      <div className="container">
+        <div className="content">
+
+          <h2>Кошелёк криптовалют</h2>
+          <Wallet
+            onAddCoins={onAddCoins}
+            changeFlagStatus={changeFlagStatus}
+            coinsWord={coinsWord}
+            coinsCount={coinsCount}
+          />
+
+          <h2>Рынок комплектующих</h2>
+          <Market 
+            coinsCount={coinsCount}
+          />
+
+          <h2>Склад</h2>
+          <Warehouse />
         </div>
       </div>
     </div>

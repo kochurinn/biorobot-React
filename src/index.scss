@@ -1,28 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family: Montserrat;
+}
+
 .wrapper {
-    h2 {
-        font-family: Montserrat;
-        font-size: 32px;
-        font-weight: 600;
-        line-height: 40px;
-        text-align: left;
-    }
-    .coins {
-        margin-bottom: 10px;
-        span:first-child {
-            margin-right: 10px;
-            font-weight: bold;
-        }
-        span:last-child {
-            margin-left: 10px;
-        }
-    }
-    .addCoins {
-        display: flex;
-        .addCoins__btn {
-            margin-right: 10px;
-            color: #FF7F22;
-            border-bottom: 1px dotted #FF7F22;
-            cursor: pointer;
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(82.33% 70.44% at 50% 0%, #26394D 0%, #212529 100%);
+    .container {
+        width: 1016px;
+        margin: 0 auto;
+        .content {
+            width: 756px;
+            margin: 0 auto;
+            h2 {
+                font-family: Montserrat;
+                font-size: 32px;
+                font-weight: 600;
+                line-height: 40px;
+                text-align: left;
+                margin-bottom: 40px;
+            }
+            .coins {
+                font-size: 20px;
+                opacity: .7;
+                margin-bottom: 10px;
+                span:first-child {
+                    margin-right: 10px;
+                    font-weight: bold;
+                }
+                span:last-child {
+                    margin-left: 10px;
+                }
+            }
+            .addCoins {
+                display: flex;
+                margin-top: 30px;
+                margin-bottom: 100px;
+                .addCoins__btn {
+                    margin-right: 30px;
+                    color: #FF7F22;
+                    border-bottom: 1px dotted #FF7F22;
+                    cursor: pointer;
+                }
+                .addCoins__checkbox {
+                    input {
+                        margin-right: 6px;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .market {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 100px;
+                .market__elem {
+                    margin-top: -50px;
+                    text-align: center;
+                    .market__elem-img {
+                        display: flex;
+                        justify-content: center;
+                        width: 250px;
+                        height: 250px;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    .market__elem-title {
+                        font-size: 20px;
+                        font-weight: 600;
+                        line-height: 32px;
+                        margin-bottom: 10px;
+                        margin-top: -50px;
+                    }
+                    .market__elem-price {
+                        opacity: .8;
+                        font-size: 16px;
+                        line-height: 24px;
+                        margin-bottom: 30px;
+                    }
+                    .market__elem-btn {
+                       width: 236px;
+                       height: 48px;
+                       line-height: 48px;
+                       background: linear-gradient(180deg, #FF7F22 0%, #FF5722 100%);
+                       border-radius: 60px;
+                       font-weight: 600;
+                       cursor: pointer;
+                       &:hover {
+                        background: #FF5722;
+                       }
+                       &--noMoney {
+                        background: #4C5865;
+                        cursor: default;
+                        &:hover {
+                            background: #4C5865;
+                        }
+                       }
+                    }
+                } 
+            }
+            .warehouse {
+                margin-top: 60px;
+                display: flex;
+                justify-content: space-between;
+                .warehouse__elem {
+                    text-align: center;
+                    .warehouse__elem-title {
+                        font-size: 20px;
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                    }
+                    .warehouse__elem-price {
+                        opacity: .8;
+                        font-size: 16px;
+                        line-height: 24px;
+                        margin-bottom: 15px;
+                    }
+                    .warehouse__elem-amount {
+                        font-size: 20px;
+                        font-weight: 600;
+                        margin-bottom: 30px;
+                    }
+                    .warehouse__elem-btn {
+                        width: 236px;
+                        height: 48px;
+                        line-height: 48px;
+                        border: 2px solid #22B3E3;
+                        color: #22B3E3;
+                        border-radius: 60px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        &:hover {
+                            background: #22B3E3;
+                            color: #000;
+                        }
+                    }
+                }
+            }
         }
     }
 }
