@@ -1,48 +1,41 @@
-function Warehouse() {
+import { elements } from "./constants"
+
+function Warehouse({ quantity, setQuantity, onCoinsChange }) {
+
+    const checkingAvailability = (quantity) => {
+        return quantity === 0 ? 'warehouse__elem-btn--outOfStock' : ''
+    }
+    
+    const onClickSell = (elemWarehouse, index) => {
+        const newQuantity = [...quantity]
+        if (newQuantity[index] !== 0) {
+            newQuantity[index]--
+            setQuantity(newQuantity)
+            onCoinsChange(elemWarehouse.sellPrice)
+        }
+    }
+
     return (
         <div className="warehouse">
-            <div className="warehouse__elem">
-                <div className="warehouse__elem-title">
-                    Биорука
+            {elements.map((elem, index) => 
+                <div key={index} className="warehouse__elem">
+                    <div className="warehouse__elem-title">
+                        {elem.title}
+                    </div>
+                    <div className="warehouse__elem-price">
+                        Стоимость: {elem.sellPrice} монет
+                    </div>
+                    <div className="warehouse__elem-amount">
+                        {quantity[index]} шт
+                    </div>
+                    <div
+                        className={`warehouse__elem-btn ${checkingAvailability(quantity[index])}`}
+                        onClick={() => onClickSell(elem, index)}
+                    >
+                        Продать
+                    </div>
                 </div>
-                <div className="warehouse__elem-price">
-                    Стоимость: 5 монет
-                </div>
-                <div className="warehouse__elem-amount">
-                    0 шт
-                </div>
-                <div className="warehouse__elem-btn">
-                    Продать
-                </div>
-            </div>
-            <div className="warehouse__elem">
-                <div className="warehouse__elem-title">
-                    Микрочип
-                </div>
-                <div className="warehouse__elem-price">
-                    Стоимость: 3 монеты
-                </div>
-                <div className="warehouse__elem-amount">
-                    0 шт
-                </div>
-                <div className="warehouse__elem-btn">
-                    Продать
-                </div>
-            </div>
-            <div className="warehouse__elem">
-                <div className="warehouse__elem-title">
-                    Душа
-                </div>
-                <div className="warehouse__elem-price">
-                    Стоимость: 15 монет
-                </div>
-                <div className="warehouse__elem-amount">
-                    0 шт
-                </div>
-                <div className="warehouse__elem-btn">
-                    Продать
-                </div>
-            </div>
+            )}
         </div>
     )
 }

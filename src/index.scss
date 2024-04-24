@@ -9,12 +9,14 @@
 }
 
 .wrapper {
+    display: flex;
+    justify-content: center;
     width: 100%;
     min-height: 100vh;
     background: radial-gradient(82.33% 70.44% at 50% 0%, #26394D 0%, #212529 100%);
+    user-select: none;
     .container {
         width: 1016px;
-        margin: 0 auto;
         .content {
             width: 756px;
             margin: 0 auto;
@@ -26,6 +28,17 @@
                 text-align: left;
                 margin-bottom: 40px;
             }
+            .coinImgBlock {
+                direction: rtl;
+                text-align: left;
+                .coinImg {
+                    position: relative;
+                    &:not(:last-child) {
+                        margin-left: -10px;
+                    }
+                }
+            }
+            
             .coins {
                 font-size: 20px;
                 opacity: .7;
@@ -109,6 +122,7 @@
                 margin-top: 60px;
                 display: flex;
                 justify-content: space-between;
+                margin-bottom: 100px;
                 .warehouse__elem {
                     text-align: center;
                     .warehouse__elem-title {
@@ -140,6 +154,86 @@
                             background: #22B3E3;
                             color: #000;
                         }
+                        &--outOfStock {
+                            color: #4C5865;
+                            border: 2px solid #4C5865;
+                            &:hover {
+                                background: transparent;
+                                color: #4C5865;
+                                cursor: default;
+                            }
+                        }
+                    }
+                }
+            }
+            .factory {
+                display: flex;
+                .factory__menu {
+                    margin-right: 10px;
+                    .factory__menu-title {
+                        font-size: 18px;
+                        margin-bottom: 30px;
+                    }
+                    .factory__menu-checkbox {
+                        display: flex;
+                        margin-bottom: 40px;
+                        .factory__menu-checkbox__elem {
+                            margin-right: 40px;
+                            input {
+                                margin-right: 10px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    .factory__menu-btn {
+                        width:  236px;
+                        height: 48px;
+                        line-height: 44px;
+                        top: 2183px;
+                        left: 342px;
+                        text-align: center;
+                        border-radius: 60px;
+                        border: 2px solid #4C5865;
+                        color: #4C5865;
+                        margin-top: 80px;
+                    }
+                }
+                .factory__details {
+                    .factory__details-elem {
+                        display: flex;
+                        .hand__elem, .chip__elem, .soul__elem {
+                            display: flex;
+                            width: 48px;
+                            height: 48px;
+                            margin: 8px 5px;
+                            border-radius: 4px;
+                            justify-content: center;
+                            align-items: center;
+                            &--outOfStock {
+                                background: #383838;
+                                border: 1px solid #383838;
+                                img {
+                                    filter: brightness(0) saturate(100%) invert(33%) sepia(4%) saturate(18%) hue-rotate(318deg) brightness(102%) contrast(77%);
+                                }
+                            }
+                            &--active {
+                                background: transparent;
+                                border: 1px solid #FF7F22;
+                            }
+                            &--selected {
+                                background: #383838;
+                                border: 1px solid #383838;
+                                img {
+                                    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(48deg) brightness(104%) contrast(103%);
+                                }
+                            }
+                        }
+                    }
+                    .factory__details-missing {
+                        font-size: 13px;
+                        width: 220px;
+                        opacity: .6;
+                        margin-top: 70px;
                     }
                 }
             }
