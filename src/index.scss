@@ -201,7 +201,7 @@
                 .factory__details {
                     .factory__details-elem {
                         display: flex;
-                        .hand__elem, .chip__elem, .soul__elem {
+                        .biohand__elem, .chip__elem, .soul__elem {
                             display: flex;
                             width: 48px;
                             height: 48px;
@@ -209,18 +209,19 @@
                             border-radius: 4px;
                             justify-content: center;
                             align-items: center;
-                            &--outOfStock {
-                                background: #383838;
-                                border: 1px solid #383838;
-                                img {
-                                    filter: brightness(0) saturate(100%) invert(33%) sepia(4%) saturate(18%) hue-rotate(318deg) brightness(102%) contrast(77%);
-                                }
+                            background: #383838;
+                            border: 1px solid #383838;
+                            img {
+                                filter: brightness(0) saturate(100%) invert(33%) sepia(4%) saturate(18%) hue-rotate(318deg) brightness(102%) contrast(77%);
                             }
                             &--active {
                                 background: transparent;
                                 border: 1px solid #FF7F22;
+                                img {
+                                    filter: brightness(0) saturate(100%) invert(59%) sepia(62%) saturate(3017%) hue-rotate(345deg) brightness(105%) contrast(101%);
+                                }
                             }
-                            &--selected {
+                            &--isStock {
                                 background: #383838;
                                 border: 1px solid #383838;
                                 img {

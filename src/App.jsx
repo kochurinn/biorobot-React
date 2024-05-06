@@ -53,6 +53,9 @@ function App() {
           <h2>Производство</h2>
           <Factory 
             quantity={quantity}
+            setQuantity={setQuantity}
+            coinsCount={coinsCount}
+            onCoinsChange={(count) => onAddCoins(-count)}
           />
           
         </div>
