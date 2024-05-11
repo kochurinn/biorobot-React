@@ -100,6 +100,7 @@ function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
             newActive[index]++
             newQuantity[index]--
         }
+        changeMissing()
         setQuantity(newQuantity)
         setActive(newActive)
     }
@@ -108,11 +109,43 @@ function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
         Object.values(details).every(d => d.active === d.count) ? 'ready' : 'notReady'
 
     const changeMissing = () => {
+
+        const objMissingWord = {
+            1: [
+                'биомеханизма',
+                'процессора',
+                'души'
+            ],
+            2: [
+                'биомеханизмов',
+                'процессоров'
+            ]
+        }
+
         const remainsBiohand = details.biohand.count - details.biohand.active
         const remainsChip = details.chip.count - details.chip.active
         const remainsSoul = details.soul.count - details.soul.active
+        let response = ''
+
+        if (!details.biohand.active && !details.chip.active && !details.soul.active && coinsCount < 10) {
+            console.log("работает 1")
+            response = 'Не хватает биомеханизмов, процессоров, души и денег'
+            return response
+        }
+        if (!details.biohand.active && !details.chip.active && !details.soul.active) {
+            console.log("работает 2")
+            response = 'Не хватает биомеханизмов, процессоров и души'
+            return response
+        }
         
+        response += 'Не хватает '
+        response += `${remainsBiohand ? `${remainsBiohand} ${remainsBiohand > 1 ? objMissingWord[2][0] : objMissingWord[1][0]}` : ''} `
+        response += `${remainsChip ? `${remainsChip} ${remainsChip > 1 ? objMissingWord[2][1] : objMissingWord[1][1]}` : ''} `
+        response += `${remainsSoul ? `${remainsSoul} ${remainsSoul > 1 ? objMissingWord[2][2] : objMissingWord[1][2]}` : ''} `
+        return response
     }
+
+    const missing = changeMissing()
 
     return (
         <div className="factory">
@@ -161,7 +194,7 @@ function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
                         ))}
                     </div>
                 ))}
-                <div className="factory__details-missing">{changeMissing}Для производства биоробота не хватает 2 биоруки, 3 микрочипа и 1 души</div>
+                <div className="factory__details-missing">{missing}</div>
             </div>
             <div className="factory__biorobot">
                 <img src={robotImages[robotKind][robotGender][robotStatus]} alt="" />
