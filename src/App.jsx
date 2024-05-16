@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Modal from "./Modal"
 import Wallet from "./Wallet"
 import Market from "./Market"
 import Warehouse from "./Warehouse"
@@ -29,6 +30,9 @@ function App() {
         <div className="content">
 
           <h2>Кошелёк криптовалют</h2>
+
+          <Modal />
+
           <Wallet
             onAddCoins={() => onAddCoins(coinsX5 ? 5 : 1)}
             changeFlagStatus={() => setCoinsX5(!coinsX5)}

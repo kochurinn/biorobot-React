@@ -74,21 +74,6 @@ function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
         }
     }
 
-    // const chekingStatus = (name) => {
-    //     for (const elem of arrDetails) {
-    //         if (elem.title === name) {
-    //             while (elem.active) {
-    //                 elem.active--
-    //                 return `${elem.title}__elem--active`
-    //             }
-    //             while (elem.isStock) {
-    //                 elem.isStock--
-    //                 return `${elem.title}__elem--isStock`
-    //             }
-    //         }
-    //     }
-    // }
-
     const changeActiveDetails = (name, cellIndex) => {
         const index = details[name].idx
         const newQuantity = [...quantity]
@@ -108,44 +93,85 @@ function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
     const robotStatus = robotDone ? 'finished' :
         Object.values(details).every(d => d.active === d.count) ? 'ready' : 'notReady'
 
+    const changeBtnBuyRobot = () => {
+        const x = Object.values(details).every(d => d.active === d.count)
+        if (x && coinsCount >= 10) {
+            return 'factory__menu-btn--active'
+        }
+    }
+
     const changeMissing = () => {
-
-        const objMissingWord = {
-            1: [
-                'биомеханизма',
-                'процессора',
-                'души'
-            ],
-            2: [
-                'биомеханизмов',
-                'процессоров'
-            ]
+        const parts = []
+        const wordsByType = {
+            biohand: ['биомеханизма', 'биомеханизмов'],
+            chip: ['процессора', 'процессоров'],
+            soul: ['души'],
+        }
+        for (const type of ['biohand', 'chip', 'soul']) {
+            const missingCount = details[type].count - details[type].active
+            if (missingCount === 1) {
+                parts.push(wordsByType[type][0])
+            } else if (missingCount > 1) {
+                parts.push(`${missingCount} ${wordsByType[type][1]}`)
+            }
+        }
+        if (coinsCount < 10) {
+            parts.push('денег')
+        }
+        if (parts.length === 0) return ''
+        const lastPart = parts.pop()
+        if (parts.length === 0) {
+            return `Не хватает ${lastPart}`
+        } else {
+            return `Не хватает ${parts.join(', ')} и ${lastPart}`
         }
 
-        const remainsBiohand = details.biohand.count - details.biohand.active
-        const remainsChip = details.chip.count - details.chip.active
-        const remainsSoul = details.soul.count - details.soul.active
-        let response = ''
+        // const objMissingWord = {
+        //     1: [
+        //         'биомеханизма',
+        //         'процессора',
+        //         'души'
+        //     ],
+        //     2: [
+        //         'биомеханизмов',
+        //         'процессоров'
+        //     ]
+        // }
 
-        if (!details.biohand.active && !details.chip.active && !details.soul.active && coinsCount < 10) {
-            console.log("работает 1")
-            response = 'Не хватает биомеханизмов, процессоров, души и денег'
-            return response
-        }
-        if (!details.biohand.active && !details.chip.active && !details.soul.active) {
-            console.log("работает 2")
-            response = 'Не хватает биомеханизмов, процессоров и души'
-            return response
-        }
+        // const remainsBiohand = details.biohand.count - details.biohand.active
+        // const remainsChip = details.chip.count - details.chip.active
+        // const remainsSoul = details.soul.count - details.soul.active
+        // let response = ''
+
+        // if (!details.biohand.active && !details.chip.active && !details.soul.active && coinsCount < 10) {
+        //     response = 'Не хватает биомеханизмов, процессоров, души и денег'
+        //     return response
+        // }
+        // if (!details.biohand.active && !details.chip.active && !details.soul.active) {
+        //     response = 'Не хватает биомеханизмов, процессоров и души'
+        //     return response
+        // }
+        // if (details.biohand.active === details.biohand.count && details.chip.active === details.chip.count && details.soul.active === details.soul.count) {
+        //     response = ''
+        //     return response
+        // }
         
-        response += 'Не хватает '
-        response += `${remainsBiohand ? `${remainsBiohand} ${remainsBiohand > 1 ? objMissingWord[2][0] : objMissingWord[1][0]}` : ''} `
-        response += `${remainsChip ? `${remainsChip} ${remainsChip > 1 ? objMissingWord[2][1] : objMissingWord[1][1]}` : ''} `
-        response += `${remainsSoul ? `${remainsSoul} ${remainsSoul > 1 ? objMissingWord[2][2] : objMissingWord[1][2]}` : ''} `
-        return response
+        // response += 'Не хватает '
+        // response += `${remainsBiohand ? `${remainsBiohand} ${remainsBiohand > 1 ? objMissingWord[2][0] : objMissingWord[1][0]}` : ''} `
+        // response += `${remainsBiohand && remainsChip && !remainsSoul ? 'и' : `${remainsBiohand && remainsChip && remainsSoul ? ', ' : ''}`} ${remainsChip ? `${remainsChip} ${remainsChip > 1 ? objMissingWord[2][1] : objMissingWord[1][1]}` : ''} `
+        // response += `${remainsChip && remainsSoul || remainsBiohand && !remainsChip && remainsSoul ? 'и' : ''} ${remainsSoul ? `${remainsSoul} ${remainsSoul > 1 ? objMissingWord[2][2] : objMissingWord[1][2]}` : ''}`
+        // return response
     }
 
     const missing = changeMissing()
+
+    const changeReadyRobotImg = () => {
+        if (robotStatus === 'ready' && coinsCount >= 10) {
+            setRobotDone(true)
+            onCoinsChange(10)
+            setActive([0,0,0])
+        }
+    }
 
     return (
         <div className="factory">
@@ -172,7 +198,12 @@ function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
                         <span>Female</span>
                     </div>
                 </div>
-                <div className="factory__menu-btn">Произвести за 10 монет</div>
+                <div 
+                    className={`factory__menu-btn ${changeBtnBuyRobot()}`}
+                    onClick={changeReadyRobotImg}
+                >
+                    Произвести за 10 монет
+                </div>
             </div>
             <div className="factory__details">
                 {['biohand', 'chip', 'soul'].map(key => (
