@@ -10,14 +10,15 @@ function App() {
   const [coinsCount, setCoinsCount] = useState(0)
   const [coinsX5, setCoinsX5] = useState(false)
   const [quantity, setQuantity] = useState([0, 0, 0])
+  const [modalActive, setModalActive] = useState([false, 0])
 
   const onAddCoins = (count) => {
     const newCount = coinsCount + count
     if (newCount > 100) {
-      alert('Ошибка. Монет не может быть больше 100')
+      setModalActive([true, 0])
       setCoinsCount(100)
     } else if (newCount < 0) {
-      alert('Ошибка. Монет не может стать меньше 0')
+      setModalActive([true, 1])
       setCoinsCount(0)
     } else {
       setCoinsCount(newCount)
@@ -31,7 +32,10 @@ function App() {
 
           <h2>Кошелёк криптовалют</h2>
 
-          <Modal />
+          <Modal 
+            modalActive={modalActive}
+            setModalActive={setModalActive}
+          />
 
           <Wallet
             onAddCoins={() => onAddCoins(coinsX5 ? 5 : 1)}
@@ -60,6 +64,7 @@ function App() {
             setQuantity={setQuantity}
             coinsCount={coinsCount}
             onCoinsChange={(count) => onAddCoins(-count)}
+            setModalActive={setModalActive}
           />
           
         </div>

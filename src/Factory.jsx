@@ -16,7 +16,7 @@ import designMale1 from "./assets/design_male_1.svg"
 import { useState } from "react"
 import c from "clsx"
 
-function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
+function Factory({ quantity, setQuantity, coinsCount, onCoinsChange, setModalActive }) {
 
     const [active, setActive] = useState([0, 0, 0])
     const [robotKind, setRobotKind] = useState('frontend')
@@ -170,6 +170,7 @@ function Factory({ quantity, setQuantity, coinsCount, onCoinsChange }) {
             setRobotDone(true)
             onCoinsChange(10)
             setActive([0,0,0])
+            setModalActive([true, 2])
         }
     }
 
